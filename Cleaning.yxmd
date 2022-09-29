@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2022.1">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="90" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\Laxmikant\Downloads\FlightDelays.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>FlightDelays.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="CRS_DEP_TIME" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="CARRIER" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="DEP_TIME" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="DEST" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="DISTANCE" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="FL_DATE" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="FL_NUM" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="ORIGIN" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="Weather" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="DAY_WEEK" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="DAY_OF_MONTH" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="TAIL_NUM" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+            <Field name="Flight Status" size="254" source="File: C:\Users\Laxmikant\Downloads\FlightDelays.csv" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings>
+        <Position x="174" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Check Box (135)">True</Value>
+          <Value name="Check Box (136)">True</Value>
+          <Value name="List Box (11)">"CRS_DEP_TIME","CARRIER","DEP_TIME","DEST","DISTANCE","FL_DATE","FL_NUM","ORIGIN","Weather","DAY_WEEK","DAY_OF_MONTH","TAIL_NUM","Flight Status"</Value>
+          <Value name="Check Box (84)">False</Value>
+          <Value name="Check Box (117)">False</Value>
+          <Value name="Check Box (15)">True</Value>
+          <Value name="Check Box (109)">False</Value>
+          <Value name="Check Box (122)">False</Value>
+          <Value name="Check Box (53)">False</Value>
+          <Value name="Check Box (58)">False</Value>
+          <Value name="Check Box (70)">False</Value>
+          <Value name="Check Box (77)">False</Value>
+          <Value name="Drop Down (81)">upper</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings Macro="Cleanse.yxmc" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="366" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="if [Flight Status] = 'ontime' then 0 &#xA;else 1&#xA;endif" field="Delayed Flight" size="4" type="Int32" />
+            <FormulaField expression="if [DAY_WEEK] = 1 then &quot;Monday&quot;&#xA;elseif [DAY_WEEK] = 2 then &quot;Tuesday&quot;&#xA;elseif [DAY_WEEK] = 3 then &quot;Wednesday&quot;&#xA;elseif [DAY_WEEK] = 4 then &quot;Thrusday&quot;&#xA;elseif [DAY_WEEK] = 5 then &quot;Friday&quot;&#xA;elseif [DAY_WEEK] = 6 then &quot;Saturday&quot;&#xA;else &quot;Sunday&quot;&#xA;endif&#xA;" field="Day_Of_Week" size="1073741823" type="V_WString" />
+            <FormulaField expression="if Length([CRS_DEP_TIME]) &lt;4 then PadLeft([CRS_DEP_TIME], 4, &quot;0&quot;)&#xA;else [CRS_DEP_TIME]&#xA;endif" field="CRS_DEP_TIME" size="254" type="String" />
+            <FormulaField expression="if Length([DEP_TIME]) &lt;4 then PadLeft([DEP_TIME], 4, &quot;0&quot;)&#xA;else [CRS_DEP_TIME]&#xA;endif" field="DEP_TIME" size="254" type="String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Delayed Flight = if [Flight Status] = 'ontime' then 0 
+else 1
+endif
+Day_Of_Week ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="270" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="CRS_DEP_TIME" selected="True" type="String" size="254" />
+            <SelectField field="DEP_TIME" selected="True" type="String" size="254" />
+            <SelectField field="DISTANCE" selected="True" type="Int64" size="8" />
+            <SelectField field="FL_DATE" selected="True" type="Date" size="10" />
+            <SelectField field="Weather" selected="True" type="Int32" size="4" />
+            <SelectField field="DAY_WEEK" selected="True" type="Int32" size="4" />
+            <SelectField field="DAY_OF_MONTH" selected="True" type="Int32" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+        <Position x="474" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <IsFrom value="False" />
+          <InputFieldName>CRS_DEP_TIME</InputFieldName>
+          <Language>English</Language>
+          <Format>hhmm</Format>
+          <OutputFieldName>Updated_CRS_DEP_TIME</OutputFieldName>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Convert CRS_DEP_TIME From:
+Custom</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+        <Position x="594" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <IsFrom value="False" />
+          <InputFieldName>DEP_TIME</InputFieldName>
+          <Language>English</Language>
+          <Format>hhmm</Format>
+          <OutputFieldName>Updated_DEP_TIME</OutputFieldName>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Convert DEP_TIME From:
+Custom</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="690" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="CARRIER" selected="True" />
+            <SelectField field="DEST" selected="True" />
+            <SelectField field="DISTANCE" selected="True" />
+            <SelectField field="FL_DATE" selected="True" />
+            <SelectField field="FL_NUM" selected="True" />
+            <SelectField field="ORIGIN" selected="True" />
+            <SelectField field="Weather" selected="True" />
+            <SelectField field="DAY_WEEK" selected="True" />
+            <SelectField field="DAY_OF_MONTH" selected="True" />
+            <SelectField field="TAIL_NUM" selected="True" />
+            <SelectField field="Flight Status" selected="True" />
+            <SelectField field="Delayed Flight" selected="True" />
+            <SelectField field="Day_Of_Week" selected="True" />
+            <SelectField field="Updated_CRS_DEP_TIME" selected="True" />
+            <SelectField field="Updated_DEP_TIME" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="774" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeDiff([Updated_DEP_TIME],[Updated_CRS_DEP_TIME],&quot;minutes&quot;)&#xA;" field="Delay_In_Mins" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Delay_In_Mins = DateTimeDiff([Updated_DEP_TIME],[Updated_CRS_DEP_TIME],"minutes"...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="882" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="CARRIER" action="GroupBy" rename="CARRIER" />
+            <SummarizeField field="Day_Of_Week" action="GroupBy" rename="Day_Of_Week" />
+            <SummarizeField field="CARRIER" action="Count" rename="Count" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output26" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Cleaning</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="16d1d2bd-08e4-40b0-807f-c8ff52dbcad5" />
+      <Telemetry>
+        <PreviousWorkflowId value="8851fc70-1d8b-44f4-a443-4ed31b073635" />
+        <OriginWorkflowId value="8851fc70-1d8b-44f4-a443-4ed31b073635" />
+      </Telemetry>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
